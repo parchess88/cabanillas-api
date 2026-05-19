@@ -22,7 +22,7 @@ from app.routers.servicios_municipales import router as servicios_municipales_ro
 from app.routers.telefonos import router as telefonos_router
 from app.routers.politica_privacidad import router as politica_router
 from app.routers.imagen import router as imagenes_router
-
+from app.routers.empresas import router as empresas_router
 
 import traceback
 from fastapi import Request
@@ -90,6 +90,7 @@ app.include_router(servicios_municipales_router, prefix=PREFIX)
 app.include_router(telefonos_router, prefix=PREFIX)
 app.include_router(politica_router, prefix=PREFIX)
 app.include_router(imagenes_router, prefix=PREFIX)
+app.include_router(empresas_router, prefix=PREFIX)
 
 # ── Health check ─────────────────────────────────────────────
 @app.get("/", tags=["Estado"])

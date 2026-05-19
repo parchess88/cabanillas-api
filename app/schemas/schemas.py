@@ -837,3 +837,59 @@ class PoliticaListResponse(BaseModel):
     total: int
 
 
+# ── Directorio Empresas ──────────────────────────────────────
+
+class EmpresaOut(BaseModel):
+    id: int
+    nombre: str
+    categoria: str
+    descripcion: str | None
+    telefono: str | None
+    email: str | None
+    web: str | None
+    direccion: str | None
+    logo_url: str | None
+    orden: int
+    activo: bool
+
+    model_config = {"from_attributes": True}
+
+    @classmethod
+    def from_orm_empresa(cls, obj):
+        return cls(
+            id=obj.id, nombre=obj.nombre, categoria=obj.categoria,
+            descripcion=obj.descripcion, telefono=obj.telefono,
+            email=obj.email, web=obj.web, direccion=obj.direccion,
+            logo_url=obj.logo_url, orden=obj.orden, activo=obj.activo,
+        )
+
+
+class EmpresaCreate(BaseModel):
+    nombre: str
+    categoria: str = 'general'
+    descripcion: str | None = None
+    telefono: str | None = None
+    email: str | None = None
+    web: str | None = None
+    direccion: str | None = None
+    logo_url: str | None = None
+    orden: int = 0
+    activo: bool = True
+
+
+class EmpresaUpdate(BaseModel):
+    nombre: str | None = None
+    categoria: str | None = None
+    descripcion: str | None = None
+    telefono: str | None = None
+    email: str | None = None
+    web: str | None = None
+    direccion: str | None = None
+    logo_url: str | None = None
+    orden: int | None = None
+    activo: bool | None = None
+
+
+class EmpresasListResponse(BaseModel):
+    data: list[EmpresaOut]
+    total: int
